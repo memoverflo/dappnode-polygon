@@ -13,7 +13,7 @@ services:
       context: ./build/heimdall
       dockerfile: Dockerfile
     volumes:
-      - "heimdall:/root/.heimdalld"
+      - "/home/meng/polygon/heimdall:/root/.heimdalld"
     ports:
       - "36656:26656"
       - "36657:26657"
@@ -22,17 +22,17 @@ services:
     environment:
       - MONIKER=DAPPNodler
       - SNAPSHOT_DATE=2021-06-22
-      - BOOTSTRAP=1
-      - "ETH1_RPC_URL=http://fullnode.dappnode:8545"
+      - BOOTSTRAP=0
+      - "ETH1_RPC_URL=https://main-light.eth.linkpool.io"
     restart: unless-stopped
     image: "heimdalld.polygon.public.dappnode.eth:0.1.0"
   heimdallr:
     environment:
       - REST_SERVER=1
-      - "ETH1_RPC_URL=http://fullnode.dappnode:8545"
+      - "ETH1_RPC_URL=https://main-light.eth.linkpool.io"
     build: *ref_0
     volumes:
-      - "heimdall:/root/.heimdalld"
+      - "/home/meng/polygon/heimdall:/root/.heimdalld"
     ports:
       - "1317"
     depends_on:
@@ -47,9 +47,9 @@ services:
       dockerfile: Dockerfile
     environment:
       - SNAPSHOT_DATE=2021-06-22
-      - BOOTSTRAP=1
+      - BOOTSTRAP=0
     volumes:
-      - "bor:/datadir"
+      - "/home/meng/polygon/bor:/datadir"
     ports:
       - "10545:8545"
       - "10546:8546"
